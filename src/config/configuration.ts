@@ -1,4 +1,14 @@
 export default () => ({
+    jwt: {
+        secret: process.env.JWT_SECRET,
+        expirationTime: parseInt(process.env.JWT_EXPIRATION_TIME) || 60 * 60 * 24,
+    },
+    google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecrect: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    },
+    frontendEndpoint: process.env.FRONTEND_ENDPOINT,
     defaultConnection: {
         type: 'mysql',
         host: process.env.DB_HOST,
