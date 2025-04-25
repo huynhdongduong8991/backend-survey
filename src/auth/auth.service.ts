@@ -34,7 +34,7 @@ export class AuthService {
     async login(userDto: UserLoginDto): Promise<{ accessToken: string }> {
         const user = await this.userService.findByEmail(userDto.email);
         if (!user) {
-            throw new ApplicationErrorException('E-0004', undefined, HttpStatus.UNAUTHORIZED);
+            throw new ApplicationErrorException('E-00004', undefined, HttpStatus.UNAUTHORIZED);
         }
         const isPasswordValid = await bcrypt.compare(userDto.password, user.password);
         if (!isPasswordValid) {
@@ -47,7 +47,7 @@ export class AuthService {
     async resetPassword(userDto: UserResetPwDto): Promise<void> {
         const user = await this.userService.findByEmail(userDto.email);
         if (!user) {
-            throw new ApplicationErrorException('E-0004', undefined, HttpStatus.UNAUTHORIZED);
+            throw new ApplicationErrorException('E-00004', undefined, HttpStatus.UNAUTHORIZED);
         }
 
         const newPassword = await bcrypt.hash(userDto.password, constants.SALT_ROUNDS);
