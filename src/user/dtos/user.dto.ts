@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UserDto {
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     googleId: string;
 

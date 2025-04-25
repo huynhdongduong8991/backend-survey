@@ -3,7 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from '@src/entities';
 import { ApplicationErrorException } from '@src/exceptions';
 import { DataSource, QueryFailedError, Repository } from 'typeorm';
-import { CreateUserDto } from './dtos/create.dto';
+import { CreateGoogleUserDto, CreateUserDto } from './dtos/create.dto';
+import { v4 as uuidv4 } from 'uuid';
+import * as bcrypt from 'bcrypt';
+import constants from '@src/config/constants';
 
 @Injectable()
 export class UserService {
@@ -19,14 +22,20 @@ export class UserService {
         });
     }
 
-    async create(createDto: CreateUserDto): Promise<Users> {
+    async findByEmail(email: string): Promise<Users> {
+        return await this.usersRepository.findOne({
+            where: { email },
+        });
+    }
+
+    async createGoogleUser(createDto: CreateGoogleUserDto): Promise<Users> {
         let user = await this.findByGoogleId(createDto.googleId);
 
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
         try {
-            if (!user)  {
+            if (!user) {
                 user = this.usersRepository.create({
                     googleId: createDto.googleId,
                     email: createDto.email,
@@ -49,5 +58,46 @@ export class UserService {
         } finally {
             await queryRunner.release();
         }
+    }
+
+    async createUser(createDto: CreateUserDto): Promise<Users> {
+        const user = await this.findByEmail(createDto.email);
+
+        if (user) {
+            throw new ApplicationErrorException('E-00003', undefined, HttpStatus.BAD_REQUEST);
+        }
+
+        const queryRunner = this.dataSource.createQueryRunner();
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
+        try {
+            const userId = uuidv4();
+            const password = await bcrypt.hash(createDto.password, constants.SALT_ROUNDS);
+            const newUser = this.usersRepository.create({
+                userId: userId,
+                email: createDto.email,
+                password: password,
+                username: createDto.username,
+            });
+            await this.usersRepository.save(newUser);
+            await queryRunner.commitTransaction();
+            return newUser;
+        } catch (error) {
+            await queryRunner.rollbackTransaction();
+
+            if (error instanceof QueryFailedError) {
+                throw new ApplicationErrorException(
+                    undefined,
+                    error.message,
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                );
+            }
+        } finally {
+            await queryRunner.release();
+        }
+    }
+
+    async update(id: number, payload: { password: string }): Promise<void> {
+        await this.usersRepository.update(id, { password: payload.password });
     }
 }

@@ -3,7 +3,6 @@ import { Strategy, VerifyCallback, Profile } from 'passport-google-oauth20';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { UserService } from '@src/user/user.service';
-import { CreateUserDto } from '@src/user/dtos/create.dto';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
@@ -31,7 +30,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
             email: email,
             username: name,
         };
-        await this.userServicve.create(user);
+        await this.userServicve.createGoogleUser(user);
         done(null, user);
     }
 }

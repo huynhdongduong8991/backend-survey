@@ -79,7 +79,7 @@ describe('userService', () => {
             jest.spyOn(userRepo, 'create').mockReturnValue(userMock);
             jest.spyOn(userRepo, 'save').mockResolvedValue(userMock);
 
-            const user = await userService.create(createDto);
+            const user = await userService.createGoogleUser(createDto);
 
             expect(user).toEqual(userMock);
             expect(userRepo.findOne).toHaveBeenCalledWith({
@@ -109,7 +109,7 @@ describe('userService', () => {
 
             jest.spyOn(userRepo, 'findOne').mockResolvedValue(userMock);
 
-            const user = await userService.create(createDto);
+            const user = await userService.createGoogleUser(createDto);
 
             expect(user).toEqual(userMock);
             expect(userRepo.findOne).toHaveBeenCalledWith({
@@ -138,7 +138,7 @@ describe('userService', () => {
             jest.spyOn(userRepo, 'save').mockRejectedValue(queryFailedError);
             jest.spyOn(queryRunner, 'rollbackTransaction').mockResolvedValue();
 
-            await expect(userService.create(createDto))
+            await expect(userService.createGoogleUser(createDto))
                 .rejects
                 .toThrow(new ApplicationErrorException(
                     undefined, 
