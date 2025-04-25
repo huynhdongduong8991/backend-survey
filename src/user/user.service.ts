@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from '@src/entities';
+import { UsersEntity } from '@src/entities';
 import { ApplicationErrorException } from '@src/exceptions';
-import { DataSource, QueryFailedError, Repository } from 'typeorm';
+import { DataSource, FindOptions, FindOptionsWhere, QueryFailedError, Repository } from 'typeorm';
 import { CreateGoogleUserDto, CreateUserDto } from './dtos/create.dto';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';
@@ -11,24 +11,30 @@ import constants from '@src/config/constants';
 @Injectable()
 export class UserService {
     constructor(
-        @InjectRepository(Users)
-        private usersRepository: Repository<Users>,
+        @InjectRepository(UsersEntity)
+        private usersRepository: Repository<UsersEntity>,
         private dataSource: DataSource,
     ) {}
 
-    async findByGoogleId(googleId: string): Promise<Users> {
+    async findByGoogleId(googleId: string): Promise<UsersEntity> {
         return await this.usersRepository.findOne({
             where: { googleId },
         });
     }
 
-    async findByEmail(email: string): Promise<Users> {
+    async findByEmail(email: string): Promise<UsersEntity> {
         return await this.usersRepository.findOne({
             where: { email },
         });
     }
 
-    async createGoogleUser(createDto: CreateGoogleUserDto): Promise<Users> {
+    async findByOptions(options: FindOptionsWhere<UsersEntity>): Promise<UsersEntity> {
+        return await this.usersRepository.findOne({
+            where: options
+        });
+    }
+
+    async createGoogleUser(createDto: CreateGoogleUserDto): Promise<UsersEntity> {
         let user = await this.findByGoogleId(createDto.googleId);
 
         const queryRunner = this.dataSource.createQueryRunner();
@@ -60,7 +66,7 @@ export class UserService {
         }
     }
 
-    async createUser(createDto: CreateUserDto): Promise<Users> {
+    async createUser(createDto: CreateUserDto): Promise<UsersEntity> {
         const user = await this.findByEmail(createDto.email);
 
         if (user) {
