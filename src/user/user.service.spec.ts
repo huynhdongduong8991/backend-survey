@@ -1,7 +1,7 @@
 import { Mocked, TestBed } from "@suites/unit";
 import { UserService } from "./user.service";
 import { DataSource, QueryFailedError, QueryRunner, Repository } from "typeorm";
-import { Users } from "@src/entities";
+import { UsersEntity } from "@src/entities";
 import { getRepositoryToken } from "@nestjs/typeorm";
 import { mockDataSource, mockQueryRunner } from "@src/utils/test";
 import { HttpStatus } from "@nestjs/common";
@@ -11,7 +11,7 @@ describe('userService', () => {
     let dataSource: DataSource;
     let queryRunner: QueryRunner;
     let userService: UserService;
-    let userRepo: Mocked<Repository<Users>>;
+    let userRepo: Mocked<Repository<UsersEntity>>;
 
     beforeEach(async () => {
         queryRunner = mockQueryRunner();
@@ -20,7 +20,7 @@ describe('userService', () => {
         const { unit, unitRef } = await TestBed.solitary(UserService).compile();
 
         userService = unit;
-        userRepo = unitRef.get(getRepositoryToken(Users) as string);
+        userRepo = unitRef.get(getRepositoryToken(UsersEntity) as string);
 
         userService['dataSource'] = dataSource;
     });
@@ -36,7 +36,7 @@ describe('userService', () => {
                 id: 1,
                 googleId: '1234567890',
                 email: 'email',
-            } as Users;
+            } as UsersEntity;
 
             jest.spyOn(userRepo, 'findOne').mockResolvedValue(userMock);
 
@@ -73,7 +73,7 @@ describe('userService', () => {
                 googleId: '1234567890',
                 email: 'email',
                 username: 'username',
-            } as Users;
+            } as UsersEntity;
 
             jest.spyOn(userRepo, 'findOne').mockResolvedValue(null);
             jest.spyOn(userRepo, 'create').mockReturnValue(userMock);
@@ -105,7 +105,7 @@ describe('userService', () => {
                 googleId: '1234567890',
                 email: 'email',
                 username: 'username',
-            } as Users;
+            } as UsersEntity;
 
             jest.spyOn(userRepo, 'findOne').mockResolvedValue(userMock);
 
@@ -129,7 +129,7 @@ describe('userService', () => {
                 googleId: '1234567890',
                 email: 'email',
                 username: 'username',
-            } as Users;
+            } as UsersEntity;
 
             const queryFailedError = new QueryFailedError('query', [], new Error('Query failed'));
 

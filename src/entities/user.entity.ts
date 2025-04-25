@@ -4,10 +4,13 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToMany,
+    JoinColumn,
 } from 'typeorm';
+import { SurveyEntity } from './survey.entity';
 
 @Entity('users')
-export class Users {
+export class UsersEntity {
     @PrimaryGeneratedColumn({ name: 'id' })
     id: number;
 
@@ -25,6 +28,10 @@ export class Users {
 
     @Column({ name: 'username', type: 'varchar', length: 255, nullable: true })
     username: string;
+
+    @OneToMany(() => SurveyEntity, (survey) => survey.userId)
+    @JoinColumn({ name: 'user_id' })
+    surveys: SurveyEntity[];
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

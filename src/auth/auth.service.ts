@@ -7,7 +7,7 @@ import { Request, Response } from 'express';
 import { UserGoogleLoginDto, UserLoginDto } from './dtos/user-login.dto';
 import { CreateGoogleUserDto, CreateUserDto } from '@src/user/dtos/create.dto';
 import { UserService } from '@src/user/user.service';
-import { Users } from '@src/entities';
+import { UsersEntity } from '@src/entities';
 import * as bcrypt from 'bcrypt';
 import { UserResetPwDto } from './dtos/user-rs-password.dto';
 
@@ -25,7 +25,7 @@ export class AuthService {
         return await this.signToken(googleId, username, email);
     }
 
-    async register(userDto: CreateUserDto): Promise<Users> {
+    async register(userDto: CreateUserDto): Promise<UsersEntity> {
         const user = await this.userService.createUser(userDto);
         delete user.password;
         return user;
@@ -41,7 +41,7 @@ export class AuthService {
             throw new ApplicationErrorException('E-00005', undefined, HttpStatus.BAD_REQUEST);
         }
 
-        return await this.signToken(user.googleId, user.username, user.email);
+        return await this.signToken(String(user.id), user.username, user.email);
     }
 
     async resetPassword(userDto: UserResetPwDto): Promise<void> {
@@ -55,9 +55,9 @@ export class AuthService {
     }
 
 
-    async signToken(googleId: string, username: string, email: string): Promise<{ accessToken: string }> {
+    async signToken(id: string, username: string, email: string): Promise<{ accessToken: string }> {
         const payload: Record<string, string> = {
-            sub: googleId,
+            id,
             username,
             email,
         };

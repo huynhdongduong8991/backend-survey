@@ -4,6 +4,7 @@ import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { SurveyModule } from './survey/survey.module';
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { UserModule } from './user/user.module';
         }),
         AuthModule,
         UserModule,
+        SurveyModule,
     ],
     controllers: [],
     providers: [],
