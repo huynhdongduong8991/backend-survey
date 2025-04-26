@@ -34,8 +34,13 @@ export class AuthService {
     async login(userDto: UserLoginDto): Promise<{ accessToken: string }> {
         const user = await this.userService.findByEmail(userDto.email);
         if (!user) {
-            throw new ApplicationErrorException('E-00004', undefined, HttpStatus.UNAUTHORIZED);
+            throw new ApplicationErrorException('E-00004', undefined, HttpStatus.BAD_REQUEST);
         }
+
+        if (!user.password) {
+            throw new ApplicationErrorException('E-00006', undefined, HttpStatus.BAD_REQUEST);
+        }
+
         const isPasswordValid = await bcrypt.compare(userDto.password, user.password);
         if (!isPasswordValid) {
             throw new ApplicationErrorException('E-00005', undefined, HttpStatus.BAD_REQUEST);

@@ -8,6 +8,7 @@ import {
     JoinColumn,
 } from 'typeorm';
 import { SurveyEntity } from './survey.entity';
+import { SubmissionEntity } from './submission.entity';
 
 @Entity('users')
 export class UsersEntity {
@@ -29,9 +30,13 @@ export class UsersEntity {
     @Column({ name: 'username', type: 'varchar', length: 255, nullable: true })
     username: string;
 
-    @OneToMany(() => SurveyEntity, (survey) => survey.userId)
+    @OneToMany(() => SurveyEntity, (survey) => survey.user)
     @JoinColumn({ name: 'user_id' })
     surveys: SurveyEntity[];
+
+    @OneToMany(() => SubmissionEntity, (submission) => submission.survey)
+    @JoinColumn({ name: 'submission_id' })
+    submissions: SubmissionEntity[];
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
