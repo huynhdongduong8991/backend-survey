@@ -22,13 +22,14 @@ export class SurveyService {
         return await this.surveyRepository.save(survey);
     }
 
-    async findAll(user: UsersEntity) {
-        return this.surveyRepository.find({ 
-            where: { user: { id: user.id } },
+    async surveys(userId: number) {
+        return await this.surveyRepository.find({ 
+            where: { user: { id: userId } },
+            relations: ['user'],
         });
     }
 
-    async findOne(id: number, user: UsersEntity) {
+    async surveyDetails(id: number, user: UsersEntity) {
         const survey = await this.surveyRepository.findOneBy({
             id,
             user: { id: user.id },
@@ -40,12 +41,12 @@ export class SurveyService {
     }
 
     async update(id: number, updateSurveyDto: CreateSurveyDto, user: UsersEntity) {
-        const survey = await this.findOne(id, user);
+        const survey = await this.surveyDetails(id, user);
         return await this.surveyRepository.save({ ...survey, ...updateSurveyDto });
     }
 
     async remove(id: number, user: UsersEntity) {
-        const survey = await this.findOne(id, user);
+        const survey = await this.surveyDetails(id, user);
         return await this.surveyRepository.remove(survey);
     }
 }

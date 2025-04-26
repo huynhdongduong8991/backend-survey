@@ -17,4 +17,7 @@ export default {
     'E-00005': {
         message: 'Incorrect Password.',
     },
+    'E-00006': {
+        message: 'Service not supported.',
+    },
 };

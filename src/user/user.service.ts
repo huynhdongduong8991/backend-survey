@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersEntity } from '@src/entities';
 import { ApplicationErrorException } from '@src/exceptions';
-import { DataSource, FindOptions, FindOptionsWhere, QueryFailedError, Repository } from 'typeorm';
+import { DataSource, FindOptionsWhere, QueryFailedError, Repository } from 'typeorm';
 import { CreateGoogleUserDto, CreateUserDto } from './dtos/create.dto';
 import { v4 as uuidv4 } from 'uuid';
 import * as bcrypt from 'bcrypt';

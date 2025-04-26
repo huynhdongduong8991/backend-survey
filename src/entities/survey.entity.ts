@@ -2,11 +2,14 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    OneToOne,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from 'typeorm';
 import { UsersEntity } from './user.entity';
+import { SubmissionEntity } from './submission.entity';
 
 @Entity('survey')
 export class SurveyEntity {
@@ -22,8 +25,13 @@ export class SurveyEntity {
     @Column({ name: 'user_id' })
     userId: number;
 
-    @OneToOne(() => UsersEntity, (user) => user.surveys)
+    @ManyToOne(() => UsersEntity, (user) => user.surveys)
+    @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
     user: UsersEntity;
+
+    @OneToMany(() => SubmissionEntity, (submission) => submission.survey)
+    @JoinColumn({ name: 'submission_id' })
+    submissions: SubmissionEntity[];
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
