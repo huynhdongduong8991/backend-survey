@@ -47,3 +47,14 @@ This guide will walk you through setting up and running the application locally.
 - Verify that the `.env` file contains the correct database credentials.
 - If migrations fail, check the error logs for details and ensure the database user has sufficient permissions.
 - If the server fails to start, check the console output for errors and verify that the port is not in use.
+
+## Generate Survey report
+1. `Login`
+- Go to login request from auth folder and sign in with your credentials.
+
+- There is already setup for store token.
+
+- To use the token has just stored on any request then move to Authorization tab and select `Bearer Token`, next assign `{{accessToken}}` variable to reuse.
+
+2. `Generate report`
+- Go to `report folder` then access the `Generate Survey Report` request and click `send` button to generate report. Finally save response to file. 

@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsJSON, IsEmail } from 'class-validator';
+import { IsString, IsNotEmpty, IsJSON } from 'class-validator';
 
 export class CreateSurveyDto {
     @IsString()
