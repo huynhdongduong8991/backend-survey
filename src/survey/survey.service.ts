@@ -5,6 +5,7 @@ import { SurveyEntity } from '@src/entities';
 import { Repository } from 'typeorm';
 import { CreateSurveyDto } from './dtos/create-survey.dto';
 import { RecordNotFoundException } from '@src/exceptions/record-not-found.exception';
+import { SurveysQueryDto } from './dtos/surveys.dto';
 
 @Injectable()
 export class SurveyService {
@@ -22,11 +23,21 @@ export class SurveyService {
         return await this.surveyRepository.save(survey);
     }
 
-    async surveys(userId: number) {
-        return await this.surveyRepository.find({ 
-            where: { user: { id: userId } },
-            relations: ['user'],
-        });
+    async surveys(query: SurveysQueryDto, userId: number) {
+        let { title, page, limit } = query;
+        title = !title ? "" : title;
+
+        const surveyQuery = this.surveyRepository
+            .createQueryBuilder('survey')
+            .leftJoin('users', 'user', 'user.id = survey.userId')
+            .where('user.id = :userId', { userId: userId })
+            .andWhere(`survey.title LIKE '%${title}%'`);
+
+        const totalItem = await surveyQuery.getCount();
+        const offset = (page - 1) * limit;
+        const surveys = await surveyQuery.offset(offset).limit(limit).getMany();
+
+        return { surveys, totalItem };
     }
 
     async surveyDetails(id: number, user: UsersEntity) {

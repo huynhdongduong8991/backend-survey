@@ -20,4 +20,7 @@ export default {
     'E-00006': {
         message: 'Service not supported.',
     },
+    'E-00007': {
+        message: 'Unable to generate AI summary due to an error.',
+    },
 };

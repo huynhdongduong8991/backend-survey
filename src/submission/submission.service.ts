@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsRelationByString, FindOptionsRelations, FindOptionsWhere, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { SurveyService } from '../survey/survey.service';
 import { SubmissionEntity, UsersEntity } from '@src/entities';
 import { CreateSubmissionDto } from './dtos/create-submission.dto';
@@ -27,9 +27,9 @@ export class SubmissionService {
         return await this.submissionRepository.save(submission);
     }
 
-    async submissions(surveyId: number) {
+    async submissions(surveyId: number, userId: number) {
         const submissions = await this.submissionRepository.find({
-            where: { surveyId },
+            where: { surveyId, userId },
             relations: ['survey']
         })
 
