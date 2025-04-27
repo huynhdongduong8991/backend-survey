@@ -51,10 +51,14 @@ This guide will walk you through setting up and running the application locally.
 ## Generate Survey report
 1. `Login`
 - Go to login request from auth folder and sign in with your credentials.
+<img width="1552" alt="Ảnh màn hình 2025-04-27 lúc 20 54 02" src="https://github.com/user-attachments/assets/6ded4d82-63f8-40d2-b427-4abcc2cd12a1" />
 
 - There is already setup for store token.
+<img width="1552" alt="Ảnh màn hình 2025-04-27 lúc 21 04 04" src="https://github.com/user-attachments/assets/4134849c-4c37-46c3-91c6-589b5aba8269" />
 
 - To use the token has just stored on any request then move to Authorization tab and select `Bearer Token`, next assign `{{accessToken}}` variable to reuse.
+<img width="1552" alt="Ảnh màn hình 2025-04-27 lúc 21 06 20" src="https://github.com/user-attachments/assets/0a8cf452-0e23-4da0-b231-b7ba18bde6e0" />
 
 2. `Generate report`
-- Go to `report folder` then access the `Generate Survey Report` request and click `send` button to generate report. Finally save response to file. 
+- Go to `report folder` then access the `Generate Survey Report` request and click `send` button to generate report. Finally save response to file.
+<img width="1552" alt="Ảnh màn hình 2025-04-27 lúc 20 58 30" src="https://github.com/user-attachments/assets/1c87f6b2-07c2-4391-bcdd-441ceb128f66" />
