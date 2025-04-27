@@ -14,5 +14,6 @@ import { UserModule } from '@src/user/user.module';
     ],
     providers: [SubmissionService],
     controllers: [SubmissionController],
+    exports: [SubmissionService]
 })
 export class SubmissionModule {}

@@ -14,7 +14,6 @@ import {
 import { JwtGuard } from '@src/auth/guard/jwt.guard';
 import { SurveyService } from './survey.service';
 import { CreateSurveyDto } from './dtos/create-survey.dto';
-import { Request } from 'express';
 import { UserService } from '@src/user/user.service';
 import { successResponse } from '@src/utils/response';
 import { GetUser } from '@src/auth/decorator/get-user.decorator';
@@ -41,14 +40,14 @@ export class SurveyController {
     }
 
     @Get()
-    async surveys(@Query() surveysDto: SurveysQueryDto) {
+    async surveys(@Query() surveysQueryDto: SurveysQueryDto) {
         const user = await this.userService.findByOptions({
-            email: surveysDto.email,
+            email: surveysQueryDto.email,
         });
         if (!user) {
             throw new BadRequestException('User not exists.');
         }
-        const data = await this.surveyService.surveys(user.id);
+        const data = await this.surveyService.surveys(surveysQueryDto, user.id);
         return successResponse({ data });
     }
 
@@ -77,7 +76,13 @@ export class SurveyController {
 
     @UseGuards(JwtGuard)
     @Delete(':id')
-    remove(@Param('id') id: string, @Req() req) {
-        return this.surveyService.remove(+id, req.user);
+    async remove(@Param('id') id: string, @GetUser() userReq) {
+        const user = await this.userService.findByOptions({
+            email: userReq.email,
+        });
+        if (!user) {
+            throw new BadRequestException('User not exists.');
+        }
+        return this.surveyService.remove(+id, user);
     }
 }

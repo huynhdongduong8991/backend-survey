@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { SurveyModule } from './survey/survey.module';
 import { SubmissionModule } from './submission/submission.module';
+import { ReportModule } from './report/report.module';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { SubmissionModule } from './submission/submission.module';
         UserModule,
         SurveyModule,
         SubmissionModule,
+        ReportModule,
     ],
     controllers: [],
     providers: [],

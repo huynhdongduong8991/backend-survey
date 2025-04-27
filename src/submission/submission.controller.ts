@@ -3,10 +3,7 @@ import {
     Get,
     Post,
     Body,
-    Param,
     UseGuards,
-    Req,
-    BadRequestException,
 } from '@nestjs/common';
 import { SubmissionService } from './submission.service';
 import { JwtGuard } from '@src/auth/guard/jwt.guard';
@@ -15,6 +12,7 @@ import { successResponse } from '@src/utils/response';
 import { GetUser } from '@src/auth/decorator/get-user.decorator';
 import { UserService } from '@src/user/user.service';
 import { SubmissionDto } from './dtos/submission.dto';
+import { RecordNotFoundException } from '@src/exceptions/record-not-found.exception';
 
 @Controller('submissions')
 @UseGuards(JwtGuard)
@@ -33,7 +31,7 @@ export class SubmissionController {
             email: userReq.email,
         });
         if (!user) {
-            throw new BadRequestException('User not exists.');
+            throw new RecordNotFoundException('User not exists.');
         }
         const data = await this.submissionService.create(
             createSubmissionDto,
@@ -44,8 +42,8 @@ export class SubmissionController {
 
     @Get()
     async submissions(@Body() submissionDto: SubmissionDto) {
-        const { surveyId } = submissionDto;
-        const data = await this.submissionService.submissions(surveyId);
+        const { surveyId, userId } = submissionDto;
+        const data = await this.submissionService.submissions(surveyId, userId);
         return successResponse({ data });
     }
 }
