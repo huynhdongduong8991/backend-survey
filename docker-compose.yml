@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   mysql:
     image: mysql:8.0
@@ -9,17 +8,13 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
     ports:
       - '3306:3306'
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - app-network
 
   app:
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: survey-app
-    restart: always
+    container_name: survey-api
+    # restart: always
     depends_on:
       - mysql
     environment:
@@ -30,16 +25,4 @@ services:
       DB_NAME: ${DB_NAME}
     ports:
       - '3000:3000'
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    command: npm run start:prod
-    networks:
-      - app-network
-
-volumes:
-  mysql_data:
-
-networks:
-  app-network:
-    driver: bridge
+    command: node dist/main
