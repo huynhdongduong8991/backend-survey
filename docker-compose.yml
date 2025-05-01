@@ -4,7 +4,7 @@ services:
     container_name: mysql_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
     ports:
       - '3306:3306'
@@ -14,11 +14,10 @@ services:
       context: .
       dockerfile: ./Dockerfile
     container_name: survey-api
-    # restart: always
     depends_on:
       - mysql
     environment:
-      DB_HOST: mysql_db
+      DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
