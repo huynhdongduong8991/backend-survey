@@ -31,7 +31,61 @@
                 },
                 "secretOptions": []
             },
-            "systemControls": []
+            "systemControls": [],
+            "secrets": [
+                {
+                    "name": "JWT_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "JWT_EXPIRATION_TIME",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "SESSION_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "DB_HOST",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "DB_PORT",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "DB_USER",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "DB_NAME",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "GOOGLE_CLIENT_ID",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "GOOGLE_CLIENT_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "GOOGLE_CALLBACK_URL",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "FRONTEND_ENDPOINT",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                },
+                {
+                    "name": "GROQ_API_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                }
+            ]
         }
     ],
     "family": "backend-survey-task-definition",
@@ -46,59 +100,5 @@
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
-    },
-    "secrets": [
-        {
-            "name": "JWT_SECRET",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "JWT_EXPIRATION_TIME",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "SESSION_SECRET",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "DB_HOST",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "DB_PORT",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "DB_USER",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "DB_PASSWORD",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "DB_NAME",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "GOOGLE_CLIENT_ID",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "GOOGLE_CLIENT_SECRET",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "GOOGLE_CALLBACK_URL",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "FRONTEND_ENDPOINT",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        },
-        {
-            "name": "GROQ_API_KEY",
-            "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
-        }
-    ]
+    }
 }
