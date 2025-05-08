@@ -35,55 +35,55 @@
             "secrets": [
                 {
                     "name": "JWT_SECRET",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:JWT_SECRET::"
                 },
                 {
                     "name": "JWT_EXPIRATION_TIME",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:JWT_EXPIRATION_TIME::"
                 },
                 {
                     "name": "SESSION_SECRET",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:SESSION_SECRET::"
                 },
                 {
                     "name": "DB_HOST",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:DB_HOST::"
                 },
                 {
                     "name": "DB_PORT",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:DB_PORT::"
                 },
                 {
                     "name": "DB_USER",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:DB_USER::"
                 },
                 {
                     "name": "DB_PASSWORD",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:DB_PASSWORD::"
                 },
                 {
                     "name": "DB_NAME",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:DB_NAME::"
                 },
                 {
                     "name": "GOOGLE_CLIENT_ID",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:GOOGLE_CLIENT_ID::"
                 },
                 {
                     "name": "GOOGLE_CLIENT_SECRET",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:GOOGLE_CLIENT_SECRET::"
                 },
                 {
                     "name": "GOOGLE_CALLBACK_URL",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:GOOGLE_CALLBACK_URL::"
                 },
                 {
                     "name": "FRONTEND_ENDPOINT",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:FRONTEND_ENDPOINT::"
                 },
                 {
                     "name": "GROQ_API_KEY",
-                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign"
+                    "valueFrom": "arn:aws:secretsmanager:ap-east-1:800067646362:secret:dev/survey-COeign:GROQ_API_KEY::"
                 }
             ]
         }
