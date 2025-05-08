@@ -22,5 +22,6 @@ export default () => ({
         migrations: ['dist/migrations/*.js'],
         entities: ['dist/entities/*.js'],
         synchronize: false,
+        ssl: { rejectUnauthorized: false },
     },
 });
